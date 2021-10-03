@@ -11,6 +11,7 @@ lr_config = dict(
     warmup_ratio=0.001,
     step=[17, 19])
 runner = dict(type='EpochBasedRunner', max_epochs=24)
+
 work_dir = "/home/dlsuncheng/Work_dir/Steel_Defect/20210928/cascade/ms"
 
 # model settings

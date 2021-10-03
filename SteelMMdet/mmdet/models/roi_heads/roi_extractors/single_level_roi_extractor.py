@@ -28,10 +28,12 @@ class SingleRoIExtractor(BaseRoIExtractor):
                  out_channels,
                  featmap_strides,
                  finest_scale=56,
-                 init_cfg=None):
+                 init_cfg=None,
+                 gc_context=False):
         super(SingleRoIExtractor, self).__init__(roi_layer, out_channels,
                                                  featmap_strides, init_cfg)
         self.finest_scale = finest_scale
+        self.gc_context = gc_context
 
     def map_roi_levels(self, rois, num_levels):
         """Map rois to corresponding feature levels by scales.

@@ -30,6 +30,7 @@ def main():
         json.dump(result, fp, indent=4, separators=(',', ': '))
     print("convert sucess!")
 
+
 if __name__ == '__main__':
     main()
 
