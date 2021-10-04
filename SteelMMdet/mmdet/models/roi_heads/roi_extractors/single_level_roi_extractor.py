@@ -33,7 +33,7 @@ class SingleRoIExtractor(BaseRoIExtractor):
         super(SingleRoIExtractor, self).__init__(roi_layer, out_channels,
                                                  featmap_strides, init_cfg)
         self.finest_scale = finest_scale
-        self.gc_context = gc_context
+        self.pool = torch.nn.AdaptiveAvgPool2d(7) 
 
     def map_roi_levels(self, rois, num_levels):
         """Map rois to corresponding feature levels by scales.
@@ -62,6 +62,7 @@ class SingleRoIExtractor(BaseRoIExtractor):
         out_size = self.roi_layers[0].output_size
         num_levels = len(feats)
         expand_dims = (-1, self.out_channels * out_size[0] * out_size[1])
+        batch_size = feats[0].shape[0]
         if torch.onnx.is_in_onnx_export():
             # Work around to export mask-rcnn to onnx
             roi_feats = rois[:, :1].clone().detach()
@@ -79,6 +80,10 @@ class SingleRoIExtractor(BaseRoIExtractor):
             if len(rois) == 0:
                 return roi_feats
             return self.roi_layers[0](feats[0], rois)
+        if self.gc_context:
+            context = []
+            for feat in feats:
+                context.append(self.pool(feat))
 
         target_lvls = self.map_roi_levels(rois, num_levels)
 
@@ -103,6 +108,9 @@ class SingleRoIExtractor(BaseRoIExtractor):
             if inds.numel() > 0:
                 rois_ = rois[inds]
                 roi_feats_t = self.roi_layers[i](feats[i], rois_)
+                if self.gc_context:
+                    for j in range(batch_size):
+                        roi_feats_t[rois_[:, 0] == j] += context[i][j]
                 roi_feats[inds] = roi_feats_t
             else:
                 # Sometimes some pyramid levels will not be used for RoI
