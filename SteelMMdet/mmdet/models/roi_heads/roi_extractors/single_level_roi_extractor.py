@@ -33,6 +33,7 @@ class SingleRoIExtractor(BaseRoIExtractor):
         super(SingleRoIExtractor, self).__init__(roi_layer, out_channels,
                                                  featmap_strides, init_cfg)
         self.finest_scale = finest_scale
+        self.gc_context = gc_context
         self.pool = torch.nn.AdaptiveAvgPool2d(7) 
 
     def map_roi_levels(self, rois, num_levels):
