@@ -1,6 +1,6 @@
 _base_ = ["../../SteelMMdet/configs/_base_/models/faster_rcnn_r50_fpn.py",
           '../../SteelMMdet/configs/_base_/default_runtime.py',
-          "../dataset_setting/detection_setting.py"]
+          "../dataset_setting/detection_setting_wrapper.py"]
 
 # model settings
 model = dict(roi_head=dict(bbox_head=dict(num_classes=5)))

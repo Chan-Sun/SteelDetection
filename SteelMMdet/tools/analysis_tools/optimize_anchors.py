@@ -328,12 +328,14 @@ def main():
     input_shape = args.input_shape
     assert len(input_shape) == 2
 
-    anchor_type = cfg.model.bbox_head.anchor_generator.type
-    assert anchor_type == 'YOLOAnchorGenerator', \
-        f'Only support optimize YOLOAnchor, but get {anchor_type}.'
+    anchor_type = cfg.model.rpn_head.anchor_generator.type
+    # assert anchor_type == 'YOLOAnchorGenerator', \
+    #     f'Only support optimize YOLOAnchor, but get {anchor_type}.'
 
-    base_sizes = cfg.model.bbox_head.anchor_generator.base_sizes
-    num_anchors = sum([len(sizes) for sizes in base_sizes])
+    #base_sizes = cfg.model.rpn_head.anchor_generator.base_sizes
+    #num_anchors = sum([len(sizes) for sizes in base_sizes])
+
+    num_anchors = 10
 
     train_data_cfg = cfg.data.train
     while 'dataset' in train_data_cfg:

@@ -76,7 +76,6 @@ def build_dataset(cfg, default_args=None):
         dataset = _concat_dataset(cfg, default_args)
     else:
         dataset = build_from_cfg(cfg, DATASETS, default_args)
-
     return dataset
 
 
