@@ -14,7 +14,7 @@ def main():
     args = parse_args()
     test_result = args.test_path
     save_path = args.save_path
-    blank_test = "/home/dlsuncheng/Steel_Defect/Dataset/Annotation/test.json"
+    blank_test = "/home/dlsuncheng/Dataset/Steel_Defect/Annotation/test.json"
     result=[]
     with open(test_result,'r') as load_f:
         test_json = json.load(load_f)

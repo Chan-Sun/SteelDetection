@@ -1,7 +1,7 @@
 _base_ = ['../../SteelMMdet/configs/_base_/default_runtime.py',
-          "../dataset_setting/detection_setting.py"]
+            "../dataset_setting/detection_setting_ms.py",]
 # optimizer
-optimizer = dict(type='SGD', lr=0.00125, momentum=0.9, weight_decay=0.0001)
+optimizer = dict(type='SGD', lr=0.0025, momentum=0.9, weight_decay=0.0001)
 optimizer_config = dict(grad_clip=None)
 # learning policy
 lr_config = dict(
@@ -11,8 +11,6 @@ lr_config = dict(
     warmup_ratio=0.001,
     step=[17, 19])
 runner = dict(type='EpochBasedRunner', max_epochs=24)
-
-work_dir = "/home/dlsuncheng/Work_dir/Steel_Defect/20210928/cascade/ms"
 
 # model settings
 model = dict(
@@ -38,7 +36,7 @@ model = dict(
         feat_channels=256,
         anchor_generator=dict(
             type='AnchorGenerator',
-            scales=[8],
+            scales=[4,8],
             ratios=[0.1,0.2,0.5, 1.0, 2.0,5.0,10],
             strides=[4, 8, 16, 32, 64]),
         bbox_coder=dict(

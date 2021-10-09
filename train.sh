@@ -4,8 +4,9 @@
 
 ### train
 # ####mask rcnn dcn
-# python /home/hustwen/sun_chen/SteelDetection/SteelMMdet/tools/train.py \
-#        /home/hustwen/sun_chen/SteelDetection/model/cascade_rcnn/cascade_rcnn_x101_64x4d_fpn_1x_coco_OHEM.py --gpu-ids 1
+
+python /home/dlsuncheng/Steel_Defect/SteelMMdet/tools/train.py \
+       /home/dlsuncheng/Steel_Defect/model/cascade_rcnn/cascade_rcnn_new_baseline.py --gpu-ids 1
 
 
 # python /home/hustwen/sun_chen/SteelDetection/SteelMMdet/tools/train.py \
@@ -16,14 +17,14 @@
 # python /home/hustwen/sun_chen/SteelDetection/SteelMMdet/tools/train.py \
 #        /home/hustwen/sun_chen/SteelDetection/model/cascade_rcnn/cascade_rcnn_x101_64x4d_fpn_1x_coco_global_context.py --gpu-ids 1
 
-python /home/hustwen/sun_chen/SteelDetection/SteelMMdet/tools/test.py \
-    /home/hustwen/sun_chen/SteelDetection/model/cascade_rcnn/cascade_rcnn_x101_64x4d_fpn_1x_coco_mixup.py \
-    /home/hustwen/sun_chen/Work_dir/Steel_Defect/20211005/cascade_x101/mixup/epoch_24.pth \
-    --format-only \
-    --options "jsonfile_prefix=./Submit/mixup_result"
-    --gpu-ids 1
+# python /home/dlsuncheng/Steel_Defect/SteelMMdet/tools/test.py \
+#     /home/dlsuncheng/Steel_Defect/model/cascade_rcnn/cascade_rcnn_x101_64x4d_fpn_1x_coco_mixup.py \
+#     /home/dlsuncheng/Work_dir/Steel_Defect/20211004/epoch_20.pth \
+#     --format-only \
+#     --options "jsonfile_prefix=./Submit/mixup_result"
+#     --gpu-ids 1
 
-# python /home/hustwen/sun_chen/SteelDetection/Submit/submit_convert.py \
+# python /home/dlsuncheng/Steel_Defect/Submit/submit_convert.py \
 #         ./Submit/mixup_result.bbox.json \
 #         ./Submit/mixup_result.json
 

@@ -469,6 +469,26 @@ class AnchorHead(BaseDenseHead, BBoxTestMixin):
         num_total_samples = (
             num_total_pos + num_total_neg if self.sampling else num_total_pos)
 
+        ### add stac settings
+        # 其中if id>1000 为暂定条件，需要根据数据集构建方法进行调整。
+        # 调整的原则为：如果id属于无监督样本，则weight_change为2，否则，为1
+
+        cls_weight_change = []
+        bbox_weight_change = []
+        for img_meta in img_metas:
+            id = int(img_meta['ori_filename'].split('.')[0])
+            if id > 1000:
+                cls_weight_change.append([2])
+                bbox_weight_change.append([[2]])
+            else:
+                cls_weight_change.append([1])
+                bbox_weight_change.append([[1]])
+        cls_weight_change = torch.tensor(cls_weight_change).cuda(device)
+        bbox_weight_change= torch.tensor(bbox_weight_change).cuda(device)
+        for i in range(len(label_weights_list)):
+            label_weights_list[i] = label_weights_list[i] * cls_weight_change
+            bbox_weights_list[i] = bbox_weights_list[i] * bbox_weight_change
+
         # anchor number of multi levels
         num_level_anchors = [anchors.size(0) for anchors in anchor_list[0]]
         # concat all level anchors and flags to a single tensor
