@@ -6,7 +6,14 @@
 # ####mask rcnn dcn
 
 python /home/dlsuncheng/Steel_Defect/SteelMMdet/tools/train.py \
-       /home/dlsuncheng/Steel_Defect/model/cascade_rcnn/cascade_rcnn_new_baseline.py --gpu-ids 1
+       /home/dlsuncheng/Steel_Defect/Model/cascade_rcnn/cascade_rcnn_part_dataset.py --gpu-ids 1
+
+# /home/dlsuncheng/Steel_Defect/Model/cascade_rcnn/cascade_rcnn_part_dataset.py
+# CUDA_VISIBLE_DEVICES=1 python /home/dlsuncheng/Steel_Defect/SteelMMdet/tools/test.py \
+#     /home/dlsuncheng/Steel_Defect/Model/cascade_rcnn/cascade_rcnn_new_baseline.py \
+#     /home/dlsuncheng/Work_dir/Steel_Defect/20211008/cascade/new_baseline/epoch_22.pth \
+#     --format-only \
+#     --options "jsonfile_prefix=./Submit/new_baseline" \
 
 
 # python /home/hustwen/sun_chen/SteelDetection/SteelMMdet/tools/train.py \

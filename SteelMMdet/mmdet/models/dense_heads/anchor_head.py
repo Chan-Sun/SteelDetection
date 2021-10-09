@@ -472,12 +472,12 @@ class AnchorHead(BaseDenseHead, BBoxTestMixin):
         ### add stac settings
         # 其中if id>1000 为暂定条件，需要根据数据集构建方法进行调整。
         # 调整的原则为：如果id属于无监督样本，则weight_change为2，否则，为1
-
+        
         cls_weight_change = []
         bbox_weight_change = []
         for img_meta in img_metas:
             id = int(img_meta['ori_filename'].split('.')[0])
-            if id > 1000:
+            if id > 3899:
                 cls_weight_change.append([2])
                 bbox_weight_change.append([[2]])
             else:
